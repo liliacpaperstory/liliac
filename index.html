@@ -1,0 +1,1280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LILIAC — Canadian Stationery</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --lilac: #7B5EA7;
+    --lilac-light: #EDE4F5;
+    --lilac-mid: #C4A8E0;
+    --lilac-dark: #4A3570;
+    --cream: #FAF7F2;
+    --warm: #F5EDE0;
+    --text: #2C2040;
+    --text-muted: #7A6E88;
+    --leaf: #5C8A4A;
+    --gold: #C9A84C;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Jost', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+
+  /* ── BANNER ── */
+  .banner {
+    background: var(--lilac-dark);
+    color: #EDE4F5;
+    text-align: center;
+    padding: 9px 1rem;
+    font-size: 12.5px;
+    letter-spacing: 0.08em;
+    font-weight: 400;
+  }
+  .banner span { color: var(--lilac-mid); margin: 0 6px; }
+
+  /* ── NAV ── */
+  nav {
+    background: var(--cream);
+    border-bottom: 1px solid #E8DFF0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    padding: 0 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 72px;
+  }
+
+  .logo-wrap {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    text-decoration: none;
+  }
+
+  /* SVG Logo inline */
+  .logo-icon {
+    width: 42px;
+    height: 42px;
+    flex-shrink: 0;
+  }
+
+  .logo-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--lilac-dark);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+  .logo-tagline {
+    font-size: 9px;
+    letter-spacing: 0.22em;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    margin-top: 1px;
+    display: block;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2.2rem;
+    list-style: none;
+  }
+  .nav-links a {
+    font-size: 12.5px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text);
+    text-decoration: none;
+    font-weight: 400;
+    transition: color 0.2s;
+    position: relative;
+  }
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -3px; left: 0; right: 0;
+    height: 1px;
+    background: var(--lilac);
+    transform: scaleX(0);
+    transition: transform 0.2s;
+  }
+  .nav-links a:hover { color: var(--lilac); }
+  .nav-links a:hover::after { transform: scaleX(1); }
+
+  .nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 1.4rem;
+  }
+  .nav-icon-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--text);
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    transition: color 0.2s;
+  }
+  .nav-icon-btn:hover { color: var(--lilac); }
+  .cart-btn {
+    background: var(--lilac);
+    color: #fff;
+    border: none;
+    border-radius: 50px;
+    padding: 8px 18px;
+    font-family: 'Jost', sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    font-weight: 400;
+    transition: background 0.2s, transform 0.15s;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+  }
+  .cart-btn:hover { background: var(--lilac-dark); transform: translateY(-1px); }
+  .cart-count {
+    background: #fff;
+    color: var(--lilac);
+    border-radius: 50%;
+    width: 17px;
+    height: 17px;
+    font-size: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 500;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 88vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-left {
+    background: var(--lilac-light);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 5rem 4rem 5rem 4.5rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--lilac);
+    margin-bottom: 1.6rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    width: 32px;
+    height: 1px;
+    background: var(--lilac-mid);
+    display: inline-block;
+  }
+
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.8rem, 5vw, 4.2rem);
+    line-height: 1.1;
+    color: var(--lilac-dark);
+    margin-bottom: 1.6rem;
+  }
+  .hero-title em { font-style: italic; color: var(--lilac); }
+
+  .hero-desc {
+    font-size: 15px;
+    line-height: 1.8;
+    color: var(--text-muted);
+    max-width: 380px;
+    margin-bottom: 2.6rem;
+  }
+
+  .hero-ctas {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    background: var(--lilac-dark);
+    color: #fff;
+    border: none;
+    padding: 14px 32px;
+    font-family: 'Jost', sans-serif;
+    font-size: 12.5px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    cursor: pointer;
+    border-radius: 2px;
+    transition: background 0.2s, transform 0.15s;
+    font-weight: 400;
+  }
+  .btn-primary:hover { background: var(--lilac); transform: translateY(-1px); }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--lilac-dark);
+    border: 1px solid var(--lilac-mid);
+    padding: 14px 32px;
+    font-family: 'Jost', sans-serif;
+    font-size: 12.5px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    cursor: pointer;
+    border-radius: 2px;
+    transition: border-color 0.2s, color 0.2s;
+    font-weight: 400;
+  }
+  .btn-ghost:hover { border-color: var(--lilac); color: var(--lilac); }
+
+  .hero-right {
+    background: var(--warm);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .hero-illustration {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Floating decorative elements */
+  .hero-badge {
+    position: absolute;
+    bottom: 3rem;
+    left: 2rem;
+    background: var(--lilac-dark);
+    color: #EDE4F5;
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    line-height: 1.6;
+    z-index: 2;
+  }
+  .hero-badge strong { font-size: 11px; display: block; font-weight: 500; }
+
+  /* ── CATEGORIES ── */
+  .section { padding: 5rem 3rem; }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    color: var(--lilac-dark);
+    margin-bottom: 0.4rem;
+    text-align: center;
+  }
+  .section-sub {
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 13.5px;
+    letter-spacing: 0.08em;
+    margin-bottom: 3rem;
+  }
+
+  .category-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1.2rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .cat-card {
+    background: var(--lilac-light);
+    border-radius: 4px;
+    padding: 2rem 1rem 1.5rem;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.2s, background 0.2s, box-shadow 0.2s;
+    border: 1px solid transparent;
+    text-decoration: none;
+    display: block;
+  }
+  .cat-card:hover {
+    transform: translateY(-4px);
+    background: #fff;
+    border-color: var(--lilac-mid);
+    box-shadow: 0 8px 30px rgba(123,94,167,0.12);
+  }
+  .cat-icon { font-size: 32px; margin-bottom: 0.8rem; display: block; }
+  .cat-name {
+    font-size: 11.5px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--lilac-dark);
+    font-weight: 500;
+  }
+  .cat-count {
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-top: 4px;
+  }
+
+  /* ── PRODUCTS ── */
+  .products-section {
+    background: #fff;
+    padding: 5rem 3rem;
+  }
+
+  .filters {
+    display: flex;
+    gap: 0.8rem;
+    justify-content: center;
+    margin-bottom: 2.5rem;
+    flex-wrap: wrap;
+  }
+  .filter-btn {
+    background: none;
+    border: 1px solid var(--lilac-mid);
+    color: var(--text-muted);
+    padding: 7px 20px;
+    border-radius: 50px;
+    font-family: 'Jost', sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-weight: 400;
+  }
+  .filter-btn.active, .filter-btn:hover {
+    background: var(--lilac);
+    color: #fff;
+    border-color: var(--lilac);
+  }
+
+  .product-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .product-card {
+    cursor: pointer;
+    position: relative;
+    transition: transform 0.2s;
+  }
+  .product-card:hover { transform: translateY(-3px); }
+
+  .product-img {
+    width: 100%;
+    aspect-ratio: 3/4;
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative;
+    margin-bottom: 1rem;
+  }
+
+  .product-img-inner {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3.5rem;
+    transition: transform 0.3s;
+  }
+  .product-card:hover .product-img-inner { transform: scale(1.06); }
+
+  .product-tag {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background: var(--lilac);
+    color: #fff;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 2px;
+  }
+  .product-tag.new { background: var(--leaf); }
+  .product-tag.sale { background: var(--gold); color: var(--text); }
+
+  .product-wishlist {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: rgba(255,255,255,0.9);
+    border: none;
+    border-radius: 50%;
+    width: 34px;
+    height: 34px;
+    cursor: pointer;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+  .product-card:hover .product-wishlist { opacity: 1; }
+
+  .product-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 15px;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+  .product-desc {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+  }
+  .product-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .product-price {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--lilac-dark);
+  }
+  .product-price .old {
+    font-size: 12px;
+    color: var(--text-muted);
+    text-decoration: line-through;
+    margin-left: 5px;
+    font-weight: 300;
+  }
+  .add-btn {
+    background: var(--lilac-light);
+    border: none;
+    border-radius: 50px;
+    padding: 6px 14px;
+    font-size: 11px;
+    color: var(--lilac-dark);
+    cursor: pointer;
+    font-family: 'Jost', sans-serif;
+    letter-spacing: 0.08em;
+    transition: background 0.2s;
+    font-weight: 400;
+  }
+  .add-btn:hover { background: var(--lilac); color: #fff; }
+
+  /* ── BANNER STRIP ── */
+  .banner-strip {
+    background: var(--lilac-dark);
+    color: var(--lilac-light);
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    text-align: center;
+    padding: 3rem;
+    gap: 2rem;
+  }
+  .strip-item strong {
+    display: block;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 400;
+    margin-bottom: 0.4rem;
+  }
+  .strip-item p {
+    font-size: 12.5px;
+    color: var(--lilac-mid);
+    letter-spacing: 0.05em;
+  }
+  .strip-icon { font-size: 28px; margin-bottom: 0.8rem; display: block; }
+
+  /* ── STORY ── */
+  .story-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 480px;
+  }
+  .story-visual {
+    background: var(--warm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 6rem;
+    position: relative;
+  }
+  .story-text {
+    padding: 5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: #fff;
+  }
+  .story-eyebrow {
+    font-size: 10.5px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--lilac);
+    margin-bottom: 1.2rem;
+  }
+  .story-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.1rem;
+    color: var(--lilac-dark);
+    line-height: 1.2;
+    margin-bottom: 1.4rem;
+  }
+  .story-body {
+    font-size: 14.5px;
+    line-height: 1.9;
+    color: var(--text-muted);
+    margin-bottom: 2rem;
+  }
+  .maple-mark {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--leaf);
+    font-weight: 500;
+  }
+
+  /* ── REVIEWS ── */
+  .reviews-section { background: var(--lilac-light); padding: 5rem 3rem; }
+  .review-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  .review-card {
+    background: #fff;
+    border-radius: 4px;
+    padding: 1.8rem;
+  }
+  .review-stars { color: var(--gold); font-size: 14px; margin-bottom: 1rem; }
+  .review-text {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 14px;
+    line-height: 1.8;
+    color: var(--text);
+    margin-bottom: 1.2rem;
+  }
+  .review-author { font-size: 12px; color: var(--text-muted); letter-spacing: 0.08em; text-transform: uppercase; }
+
+  /* ── NEWSLETTER ── */
+  .newsletter {
+    background: var(--cream);
+    padding: 5rem 3rem;
+    text-align: center;
+  }
+  .nl-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    color: var(--lilac-dark);
+    margin-bottom: 0.8rem;
+  }
+  .nl-sub { color: var(--text-muted); font-size: 14px; margin-bottom: 2rem; }
+  .nl-form {
+    display: flex;
+    max-width: 420px;
+    margin: 0 auto;
+    gap: 0;
+    border: 1px solid var(--lilac-mid);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .nl-input {
+    flex: 1;
+    border: none;
+    padding: 13px 18px;
+    font-family: 'Jost', sans-serif;
+    font-size: 13px;
+    background: #fff;
+    color: var(--text);
+    outline: none;
+  }
+  .nl-submit {
+    background: var(--lilac);
+    color: #fff;
+    border: none;
+    padding: 13px 22px;
+    font-family: 'Jost', sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    font-weight: 400;
+    transition: background 0.2s;
+  }
+  .nl-submit:hover { background: var(--lilac-dark); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--lilac-dark);
+    color: var(--lilac-light);
+    padding: 4rem 3rem 2rem;
+  }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 3rem;
+    max-width: 1100px;
+    margin: 0 auto 3rem;
+  }
+  .footer-brand .logo-text { color: var(--lilac-mid); font-size: 18px; }
+  .footer-brand .logo-tagline { color: rgba(200,180,220,0.6); }
+  .footer-desc {
+    font-size: 13px;
+    line-height: 1.8;
+    color: rgba(200,180,220,0.7);
+    margin-top: 1rem;
+    margin-bottom: 1.4rem;
+  }
+  .footer-social { display: flex; gap: 12px; }
+  .social-btn {
+    background: rgba(255,255,255,0.1);
+    border: none;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    color: var(--lilac-light);
+    cursor: pointer;
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+  }
+  .social-btn:hover { background: var(--lilac); }
+
+  .footer-col h4 {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--lilac-mid);
+    margin-bottom: 1.2rem;
+    font-weight: 500;
+  }
+  .footer-col ul { list-style: none; }
+  .footer-col li { margin-bottom: 0.7rem; }
+  .footer-col a {
+    color: rgba(200,180,220,0.65);
+    text-decoration: none;
+    font-size: 13px;
+    transition: color 0.2s;
+  }
+  .footer-col a:hover { color: var(--lilac-mid); }
+
+  .footer-bottom {
+    border-top: 1px solid rgba(200,180,220,0.2);
+    padding-top: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+    color: rgba(200,180,220,0.5);
+    max-width: 1100px;
+    margin: 0 auto;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  .payment-icons { display: flex; gap: 8px; align-items: center; }
+  .pay-pill {
+    background: rgba(255,255,255,0.1);
+    border-radius: 3px;
+    padding: 4px 8px;
+    font-size: 10px;
+    letter-spacing: 0.05em;
+  }
+
+  /* MODAL */
+  .cart-modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 999;
+  }
+  .cart-modal.open { display: flex; }
+  .modal-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(44,32,64,0.5);
+  }
+  .cart-panel {
+    position: absolute;
+    right: 0; top: 0; bottom: 0;
+    width: 380px;
+    background: var(--cream);
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    overflow-y: auto;
+  }
+  .cart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .cart-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    color: var(--lilac-dark);
+  }
+  .close-btn {
+    background: none;
+    border: none;
+    font-size: 22px;
+    cursor: pointer;
+    color: var(--text-muted);
+  }
+  .cart-item {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    padding: 1rem;
+    background: #fff;
+    border-radius: 4px;
+  }
+  .cart-item-emoji { font-size: 2.2rem; width: 50px; text-align: center; }
+  .cart-item-info { flex: 1; }
+  .cart-item-name { font-size: 14px; font-weight: 500; color: var(--text); }
+  .cart-item-price { font-size: 13px; color: var(--lilac); margin-top: 3px; }
+  .cart-total {
+    border-top: 1px solid #E8DFF0;
+    padding-top: 1rem;
+    display: flex;
+    justify-content: space-between;
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--lilac-dark);
+  }
+  .checkout-btn {
+    background: var(--lilac-dark);
+    color: #fff;
+    border: none;
+    padding: 16px;
+    width: 100%;
+    font-family: 'Jost', sans-serif;
+    font-size: 13px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    cursor: pointer;
+    border-radius: 2px;
+    transition: background 0.2s;
+  }
+  .checkout-btn:hover { background: var(--lilac); }
+  .cart-empty {
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 14px;
+    padding: 2rem;
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+  }
+
+  /* Toast */
+  .toast {
+    position: fixed;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%) translateY(80px);
+    background: var(--lilac-dark);
+    color: #fff;
+    padding: 12px 24px;
+    border-radius: 50px;
+    font-size: 13px;
+    z-index: 9999;
+    transition: transform 0.3s;
+    pointer-events: none;
+  }
+  .toast.show { transform: translateX(-50%) translateY(0); }
+</style>
+</head>
+<body>
+
+<div class="banner">
+  🍁 Free shipping on orders over $85 CAD <span>✦</span> Proudly Canadian, shipping coast to coast <span>✦</span> 🌿 Eco-friendly packaging
+</div>
+
+<nav>
+  <a class="logo-wrap" href="#">
+    <svg class="logo-icon" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- Lilac flower logo -->
+      <circle cx="21" cy="21" r="20" fill="#EDE4F5" stroke="#C4A8E0" stroke-width="1"/>
+      <!-- petals -->
+      <ellipse cx="21" cy="11" rx="3" ry="5.5" fill="#7B5EA7" opacity="0.9"/>
+      <ellipse cx="29" cy="15" rx="5.5" ry="3" fill="#7B5EA7" opacity="0.75"/>
+      <ellipse cx="29" cy="27" rx="5.5" ry="3" fill="#7B5EA7" opacity="0.75"/>
+      <ellipse cx="21" cy="31" rx="3" ry="5.5" fill="#7B5EA7" opacity="0.9"/>
+      <ellipse cx="13" cy="27" rx="5.5" ry="3" fill="#7B5EA7" opacity="0.75"/>
+      <ellipse cx="13" cy="15" rx="5.5" ry="3" fill="#7B5EA7" opacity="0.75"/>
+      <!-- center -->
+      <circle cx="21" cy="21" r="5" fill="#4A3570"/>
+      <circle cx="21" cy="21" r="2.5" fill="#EDE4F5"/>
+    </svg>
+    <div>
+      <span class="logo-text">Liliac</span>
+      <span class="logo-tagline">Paper & Goods</span>
+    </div>
+  </a>
+
+  <ul class="nav-links">
+    <li><a href="#">New</a></li>
+    <li><a href="#">Cards</a></li>
+    <li><a href="#">Journals</a></li>
+    <li><a href="#">Gifts</a></li>
+    <li><a href="#">Sale</a></li>
+  </ul>
+
+  <div class="nav-actions">
+    <button class="nav-icon-btn" aria-label="Search">🔍</button>
+    <button class="nav-icon-btn" aria-label="Wishlist">♡</button>
+    <button class="cart-btn" id="cartToggle" aria-label="Cart">
+      🛍 Cart <span class="cart-count" id="cartCount">0</span>
+    </button>
+  </div>
+</nav>
+
+<!-- CART MODAL -->
+<div class="cart-modal" id="cartModal">
+  <div class="modal-overlay" id="modalOverlay"></div>
+  <div class="cart-panel">
+    <div class="cart-header">
+      <span class="cart-title">Your Cart</span>
+      <button class="close-btn" id="closeCart">✕</button>
+    </div>
+    <div id="cartItems">
+      <p class="cart-empty">Your cart is empty.<br>Let's fill it with something beautiful.</p>
+    </div>
+    <div class="cart-total" id="cartTotal" style="display:none">
+      <span>Total (CAD)</span>
+      <span id="totalPrice">$0.00</span>
+    </div>
+    <button class="checkout-btn" id="checkoutBtn" style="display:none">Proceed to Checkout →</button>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <p class="hero-eyebrow">New Collection — Spring 2026</p>
+    <h1 class="hero-title">Write your<br>world in<br><em>lilac</em> ink</h1>
+    <p class="hero-desc">Thoughtfully crafted stationery for the details that matter — handmade with love in Canada, delivered to your door.</p>
+    <div class="hero-ctas">
+      <button class="btn-primary" onclick="document.querySelector('.products-section').scrollIntoView({behavior:'smooth'})">Shop Now</button>
+      <button class="btn-ghost">Our Story</button>
+    </div>
+  </div>
+  <div class="hero-right">
+    <svg viewBox="0 0 600 560" xmlns="http://www.w3.org/2000/svg" style="width:90%;max-width:500px">
+      <!-- Background flora -->
+      <circle cx="300" cy="280" r="220" fill="#EDE4F5" opacity="0.4"/>
+      <!-- Open journal/notebook -->
+      <rect x="110" y="130" width="220" height="300" rx="6" fill="#fff" stroke="#C4A8E0" stroke-width="1.5"/>
+      <rect x="270" y="130" width="220" height="300" rx="6" fill="#FAF7F2" stroke="#C4A8E0" stroke-width="1.5"/>
+      <!-- Spine -->
+      <rect x="265" y="130" width="10" height="300" fill="#EDE4F5"/>
+      <!-- Lines on left page -->
+      <line x1="135" y1="170" x2="285" y2="170" stroke="#E8DFF0" stroke-width="1"/>
+      <line x1="135" y1="188" x2="285" y2="188" stroke="#E8DFF0" stroke-width="1"/>
+      <line x1="135" y1="206" x2="285" y2="206" stroke="#E8DFF0" stroke-width="1"/>
+      <line x1="135" y1="224" x2="285" y2="224" stroke="#E8DFF0" stroke-width="1"/>
+      <line x1="135" y1="242" x2="285" y2="242" stroke="#E8DFF0" stroke-width="1"/>
+      <line x1="135" y1="260" x2="285" y2="260" stroke="#E8DFF0" stroke-width="1"/>
+      <line x1="135" y1="278" x2="285" y2="278" stroke="#E8DFF0" stroke-width="1"/>
+      <line x1="135" y1="296" x2="285" y2="296" stroke="#E8DFF0" stroke-width="1"/>
+      <!-- Script text left page -->
+      <text x="140" y="168" font-family="Georgia,serif" font-style="italic" font-size="11" fill="#7B5EA7" opacity="0.7">Today I am grateful for...</text>
+      <text x="140" y="190" font-family="Georgia,serif" font-style="italic" font-size="10" fill="#B9A0D4" opacity="0.6">the light through the window,</text>
+      <text x="140" y="208" font-family="Georgia,serif" font-style="italic" font-size="10" fill="#B9A0D4" opacity="0.5">warm coffee in hand,</text>
+      <!-- Flower doodles on right page -->
+      <circle cx="340" cy="210" r="25" fill="none" stroke="#7B5EA7" stroke-width="1.2"/>
+      <circle cx="340" cy="210" r="8" fill="#7B5EA7" opacity="0.2"/>
+      <ellipse cx="340" cy="183" rx="5" ry="9" fill="#7B5EA7" opacity="0.5"/>
+      <ellipse cx="340" cy="237" rx="5" ry="9" fill="#7B5EA7" opacity="0.5"/>
+      <ellipse cx="313" cy="210" rx="9" ry="5" fill="#7B5EA7" opacity="0.5"/>
+      <ellipse cx="367" cy="210" rx="9" ry="5" fill="#7B5EA7" opacity="0.5"/>
+      <!-- Washi tape -->
+      <rect x="150" y="345" width="80" height="18" rx="2" fill="#C4A8E0" opacity="0.55" transform="rotate(-8 150 345)"/>
+      <!-- Pen -->
+      <rect x="500" y="140" width="10" height="240" rx="5" fill="#4A3570" transform="rotate(20 500 140)"/>
+      <polygon points="487,355 492,375 502,360" fill="#C9A84C"/>
+      <!-- Sticker star on right page -->
+      <text x="390" y="310" font-size="24" fill="#C9A84C">✦</text>
+      <!-- Small envelope -->
+      <rect x="295" y="320" width="90" height="65" rx="3" fill="#fff" stroke="#C4A8E0" stroke-width="1"/>
+      <polyline points="295,320 340,355 385,320" fill="none" stroke="#C4A8E0" stroke-width="1"/>
+      <!-- Flowers floating -->
+      <circle cx="95" cy="200" r="18" fill="#7B5EA7" opacity="0.12"/>
+      <circle cx="510" cy="350" r="22" fill="#C4A8E0" opacity="0.2"/>
+      <!-- Canadian leaf accent -->
+      <text x="78" y="420" font-size="28" opacity="0.25">🍁</text>
+      <text x="505" y="170" font-size="20" opacity="0.2">🍁</text>
+    </svg>
+
+    <div class="hero-badge">
+      <strong>🍁</strong>
+      Proudly<br>Canadian
+    </div>
+  </div>
+</section>
+
+<!-- CATEGORIES -->
+<section class="section">
+  <h2 class="section-title">Shop by Category</h2>
+  <p class="section-sub">Everything you need to write, wrap, and celebrate</p>
+  <div class="category-grid">
+    <a class="cat-card" href="#">
+      <span class="cat-icon">💌</span>
+      <span class="cat-name">Greeting Cards</span>
+      <p class="cat-count">48 styles</p>
+    </a>
+    <a class="cat-card" href="#">
+      <span class="cat-icon">📔</span>
+      <span class="cat-name">Journals</span>
+      <p class="cat-count">22 styles</p>
+    </a>
+    <a class="cat-card" href="#">
+      <span class="cat-icon">🎀</span>
+      <span class="cat-name">Stickers</span>
+      <p class="cat-count">90+ designs</p>
+    </a>
+    <a class="cat-card" href="#">
+      <span class="cat-icon">🖊️</span>
+      <span class="cat-name">Pens & Pencils</span>
+      <p class="cat-count">35 items</p>
+    </a>
+    <a class="cat-card" href="#">
+      <span class="cat-icon">🎁</span>
+      <span class="cat-name">Gift Sets</span>
+      <p class="cat-count">14 sets</p>
+    </a>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section class="products-section">
+  <h2 class="section-title">New Arrivals</h2>
+  <p class="section-sub">Fresh from our studio</p>
+
+  <div class="filters">
+    <button class="filter-btn active" data-filter="all">All</button>
+    <button class="filter-btn" data-filter="cards">Cards</button>
+    <button class="filter-btn" data-filter="journals">Journals</button>
+    <button class="filter-btn" data-filter="stickers">Stickers</button>
+    <button class="filter-btn" data-filter="gifts">Gifts</button>
+  </div>
+
+  <div class="product-grid" id="productGrid">
+    <!-- Products injected by JS -->
+  </div>
+</section>
+
+<!-- PERKS STRIP -->
+<div class="banner-strip">
+  <div class="strip-item">
+    <span class="strip-icon">🍁</span>
+    <strong>Made in Canada</strong>
+    <p>Designed & crafted by our team in Vancouver, BC</p>
+  </div>
+  <div class="strip-item">
+    <span class="strip-icon">🌿</span>
+    <strong>Eco Packaging</strong>
+    <p>Recycled materials, compostable mailers, zero plastic</p>
+  </div>
+  <div class="strip-item">
+    <span class="strip-icon">✉️</span>
+    <strong>Free Shipping $85+</strong>
+    <p>Across Canada — fast, tracked, and lovingly packed</p>
+  </div>
+</div>
+
+<!-- STORY -->
+<section class="story-section">
+  <div class="story-visual">
+    <svg viewBox="0 0 380 400" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
+      <rect width="380" height="400" fill="#F5EDE0"/>
+      <!-- decorative stationery flat lay -->
+      <rect x="60" y="60" width="180" height="240" rx="4" fill="#fff" stroke="#C4A8E0" stroke-width="1.5" transform="rotate(-8 60 60)"/>
+      <text x="80" y="130" font-family="Georgia,serif" font-style="italic" font-size="13" fill="#7B5EA7" transform="rotate(-8 80 130)">A note, just for you</text>
+      <line x1="72" y1="148" x2="225" y2="130" stroke="#E8DFF0" stroke-width="1" />
+      <line x1="68" y1="164" x2="221" y2="146" stroke="#E8DFF0" stroke-width="1" />
+      <!-- second sheet -->
+      <rect x="160" y="100" width="160" height="200" rx="4" fill="#EDE4F5" stroke="#C4A8E0" stroke-width="1" transform="rotate(10 160 100)"/>
+      <!-- lilac branch watercolour style -->
+      <ellipse cx="195" cy="170" rx="12" ry="18" fill="#7B5EA7" opacity="0.35" transform="rotate(-20 195 170)"/>
+      <ellipse cx="210" cy="155" rx="10" ry="14" fill="#7B5EA7" opacity="0.45" transform="rotate(-10 210 155)"/>
+      <ellipse cx="225" cy="165" rx="8" ry="12" fill="#7B5EA7" opacity="0.3" transform="rotate(5 225 165)"/>
+      <!-- Maple leaf -->
+      <text x="270" y="310" font-size="48" opacity="0.18" transform="rotate(15 270 310)">🍁</text>
+      <!-- washi strips -->
+      <rect x="50" y="280" width="100" height="12" rx="2" fill="#C4A8E0" opacity="0.6" transform="rotate(-5 50 280)"/>
+      <rect x="230" y="260" width="80" height="12" rx="2" fill="#C9A84C" opacity="0.5" transform="rotate(8 230 260)"/>
+    </svg>
+  </div>
+  <div class="story-text">
+    <p class="story-eyebrow">Our Story</p>
+    <h2 class="story-title">Born from a love of the written word</h2>
+    <p class="story-body">Liliac began in a small Vancouver apartment with a single idea: stationery should feel as meaningful as the words written on it. We believe in slowing down, putting pen to paper, and choosing gifts that speak from the heart.<br><br>Every product we create is designed in-house, printed on quality paper, and packaged with care — because the details matter.</p>
+    <div class="maple-mark">🍁 Proudly Canadian-owned & operated since 2019</div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="reviews-section">
+  <h2 class="section-title">What our customers say</h2>
+  <p class="section-sub">Over 1,200 five-star reviews across Canada 🇨🇦</p>
+  <div class="review-grid">
+    <div class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"The quality of these journals is absolutely stunning. I've ordered from plenty of stationery shops and nothing compares — the paper, the binding, the whole feel of it."</p>
+      <p class="review-author">— Madeleine R., Toronto ON</p>
+    </div>
+    <div class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"Love that it's a Canadian company! My order arrived so quickly and the packaging was gorgeous. Will be gifting these to everyone this holiday season."</p>
+      <p class="review-author">— Sarah K., Calgary AB</p>
+    </div>
+    <div class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"I bought the lilac washi tape set and it's just perfect — soft colours, clean finish. My bullet journal has never looked better. Already placed a second order!"</p>
+      <p class="review-author">— Jess T., Vancouver BC</p>
+    </div>
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<section class="newsletter">
+  <p style="font-size:2rem; margin-bottom:0.5rem">✉️</p>
+  <h2 class="nl-title">Join the Liliac community</h2>
+  <p class="nl-sub">New arrivals, exclusive offers, and stationery inspiration — straight to your inbox.</p>
+  <div class="nl-form">
+    <input class="nl-input" type="email" placeholder="your@email.com" id="nlEmail">
+    <button class="nl-submit" onclick="subscribeNewsletter()">Subscribe</button>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="logo-wrap" style="text-decoration:none; margin-bottom:0.8rem">
+        <svg width="32" height="32" viewBox="0 0 42 42" fill="none">
+          <circle cx="21" cy="21" r="20" fill="#4A3570" stroke="#7B5EA7" stroke-width="1"/>
+          <ellipse cx="21" cy="11" rx="3" ry="5.5" fill="#C4A8E0" opacity="0.9"/>
+          <ellipse cx="29" cy="15" rx="5.5" ry="3" fill="#C4A8E0" opacity="0.75"/>
+          <ellipse cx="29" cy="27" rx="5.5" ry="3" fill="#C4A8E0" opacity="0.75"/>
+          <ellipse cx="21" cy="31" rx="3" ry="5.5" fill="#C4A8E0" opacity="0.9"/>
+          <ellipse cx="13" cy="27" rx="5.5" ry="3" fill="#C4A8E0" opacity="0.75"/>
+          <ellipse cx="13" cy="15" rx="5.5" ry="3" fill="#C4A8E0" opacity="0.75"/>
+          <circle cx="21" cy="21" r="5" fill="#EDE4F5"/>
+          <circle cx="21" cy="21" r="2.5" fill="#4A3570"/>
+        </svg>
+        <div>
+          <span class="logo-text">Liliac</span>
+          <span class="logo-tagline">Paper & Goods</span>
+        </div>
+      </div>
+      <p class="footer-desc">Thoughtfully designed stationery, proudly crafted in Canada. We put love into every sheet, stamp, and sticker.</p>
+      <div class="footer-social">
+        <button class="social-btn" title="Instagram">📷</button>
+        <button class="social-btn" title="Pinterest">📌</button>
+        <button class="social-btn" title="TikTok">🎵</button>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Shop</h4>
+      <ul>
+        <li><a href="#">New Arrivals</a></li>
+        <li><a href="#">Greeting Cards</a></li>
+        <li><a href="#">Journals & Notebooks</a></li>
+        <li><a href="#">Stickers</a></li>
+        <li><a href="#">Gift Sets</a></li>
+        <li><a href="#">Sale</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Info</h4>
+      <ul>
+        <li><a href="#">Our Story</a></li>
+        <li><a href="#">Sustainability</a></li>
+        <li><a href="#">Wholesale</a></li>
+        <li><a href="#">Press</a></li>
+        <li><a href="#">Blog</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Help</h4>
+      <ul>
+        <li><a href="#">Shipping Info</a></li>
+        <li><a href="#">Returns & Exchanges</a></li>
+        <li><a href="#">FAQ</a></li>
+        <li><a href="#">Contact Us</a></li>
+        <li><a href="#">Gift Cards</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Liliac Paper & Goods. All rights reserved. 🍁 Vancouver, BC, Canada</span>
+    <div class="payment-icons">
+      <span class="pay-pill">Visa</span>
+      <span class="pay-pill">Mastercard</span>
+      <span class="pay-pill">Amex</span>
+      <span class="pay-pill">Apple Pay</span>
+      <span class="pay-pill">PayPal</span>
+    </div>
+  </div>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const products = [
+  { id:1, name:"Wildflower Gratitude Journal", desc:"Dot-grid, 200 pages", price:28, emoji:"📓", bg:"#EDE4F5", cat:"journals", tag:"new" },
+  { id:2, name:"Pressed Floral Birthday Card", desc:"A2 with envelope", price:7, emoji:"🌸", bg:"#FAF7F2", cat:"cards", tag:"" },
+  { id:3, name:"Lilac Washi Tape Set (6)", desc:"15mm, matte finish", price:18, emoji:"🎀", bg:"#F5EDE0", cat:"stickers", tag:"new" },
+  { id:4, name:"Morning Ritual Pen Set", desc:"0.5mm, archival ink", price:24, emoji:"🖊️", bg:"#EDE4F5", cat:"gifts", tag:"" },
+  { id:5, name:"Maple & Bloom Notepad", desc:"50 sheets, A5 size", price:14, emoji:"🍁", bg:"#F5EDE0", cat:"stickers", tag:"" },
+  { id:6, name:"Thinking of You Card Bundle", desc:"Set of 6 assorted", price:32, emoji:"💌", bg:"#EDE4F5", cat:"cards", tag:"sale", oldPrice:42 },
+  { id:7, name:"Classic Linen Hardcover Journal", desc:"192 pages, lay-flat", price:36, emoji:"📔", bg:"#FAF7F2", cat:"journals", tag:"" },
+  { id:8, name:"The Everything Gift Box", desc:"Curated stationery set", price:65, emoji:"🎁", bg:"#EDE4F5", cat:"gifts", tag:"new" },
+];
+
+let cart = [];
+let activeFilter = "all";
+
+function renderProducts() {
+  const grid = document.getElementById('productGrid');
+  const filtered = activeFilter === 'all' ? products : products.filter(p => p.cat === activeFilter);
+  grid.innerHTML = filtered.map(p => `
+    <div class="product-card">
+      <div class="product-img" style="background:${p.bg}">
+        <div class="product-img-inner">${p.emoji}</div>
+        ${p.tag ? `<span class="product-tag ${p.tag}">${p.tag.toUpperCase()}</span>` : ''}
+        <button class="product-wishlist" aria-label="Wishlist">♡</button>
+      </div>
+      <p class="product-name">${p.name}</p>
+      <p class="product-desc">${p.desc}</p>
+      <div class="product-footer">
+        <span class="product-price">$${p.price} CAD${p.oldPrice ? `<span class="old">$${p.oldPrice}</span>` : ''}</span>
+        <button class="add-btn" onclick="addToCart(${p.id})">+ Add</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+function addToCart(id) {
+  const product = products.find(p => p.id === id);
+  const existing = cart.find(i => i.id === id);
+  if (existing) existing.qty++;
+  else cart.push({ ...product, qty: 1 });
+  updateCartUI();
+  showToast(`${product.emoji} Added to cart!`);
+}
+
+function updateCartUI() {
+  const count = cart.reduce((s, i) => s + i.qty, 0);
+  document.getElementById('cartCount').textContent = count;
+
+  const itemsDiv = document.getElementById('cartItems');
+  const totalDiv = document.getElementById('cartTotal');
+  const checkoutBtn = document.getElementById('checkoutBtn');
+
+  if (cart.length === 0) {
+    itemsDiv.innerHTML = '<p class="cart-empty">Your cart is empty.<br>Let\'s fill it with something beautiful.</p>';
+    totalDiv.style.display = 'none';
+    checkoutBtn.style.display = 'none';
+  } else {
+    itemsDiv.innerHTML = cart.map(i => `
+      <div class="cart-item">
+        <span class="cart-item-emoji">${i.emoji}</span>
+        <div class="cart-item-info">
+          <p class="cart-item-name">${i.name}</p>
+          <p class="cart-item-price">$${i.price} CAD × ${i.qty}</p>
+        </div>
+      </div>
+    `).join('');
+    const total = cart.reduce((s, i) => s + i.price * i.qty, 0);
+    document.getElementById('totalPrice').textContent = `$${total.toFixed(2)}`;
+    totalDiv.style.display = 'flex';
+    checkoutBtn.style.display = 'block';
+  }
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2200);
+}
+
+function subscribeNewsletter() {
+  const email = document.getElementById('nlEmail').value;
+  if (email && email.includes('@')) {
+    showToast('🌸 Welcome to the Liliac family!');
+    document.getElementById('nlEmail').value = '';
+  }
+}
+
+document.getElementById('cartToggle').addEventListener('click', () => {
+  document.getElementById('cartModal').classList.add('open');
+});
+document.getElementById('closeCart').addEventListener('click', () => {
+  document.getElementById('cartModal').classList.remove('open');
+});
+document.getElementById('modalOverlay').addEventListener('click', () => {
+  document.getElementById('cartModal').classList.remove('open');
+});
+document.getElementById('checkoutBtn').addEventListener('click', () => {
+  showToast('🛍 Redirecting to checkout…');
+});
+
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    activeFilter = btn.dataset.filter;
+    renderProducts();
+  });
+});
+
+renderProducts();
+updateCartUI();
+</script>
+</body>
+</html>

@@ -1178,7 +1178,7 @@ const products = [
   { id:6, name:"Thinking of You Card Bundle", desc:"Set of 6 assorted", price:32, emoji:"💌", bg:"#EDE4F5", cat:"cards", tag:"sale", oldPrice:42 },
   { id:7, name:"Classic Linen Hardcover Journal", desc:"192 pages, lay-flat", price:36, emoji:"📔", bg:"#FAF7F2", cat:"journals", tag:"" },
   { id:8, name:"The Everything Gift Box", desc:"Curated stationery set", price:65, emoji:"🎁", bg:"#EDE4F5", cat:"gifts", tag:"new" },
-  { id:9, name:"Pressed Baby Birthday Card", desc:"A2 with envelope", price:7, image:"Screenshot 2026-05-25 144914.png", bg:"#FAF7F2", cat:"cards", tag:"" },
+  { id:9, name:"Pressed Baby Birthday Card", desc:"A2 with envelope", price:7, image:"baby2card.png", bg:"#FAF7F2", cat:"cards", tag:"" },
 ];
 
 let cart = [];
@@ -1190,7 +1190,9 @@ function renderProducts() {
   grid.innerHTML = filtered.map(p => `
     <div class="product-card">
       <div class="product-img" style="background:${p.bg}">
-        <div class="product-img-inner">${p.emoji}</div>
+        <div class="product-img-inner">
+  ${p.image ? `<img src="images/${p.image}" alt="${p.name}" style="width:100%; height:100%; object-fit:cover;">` : `<span>${p.emoji}</span>`}
+</div>
         ${p.tag ? `<span class="product-tag ${p.tag}">${p.tag.toUpperCase()}</span>` : ''}
         <button class="product-wishlist" aria-label="Wishlist">♡</button>
       </div>

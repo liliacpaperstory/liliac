@@ -849,11 +849,11 @@
   </a>
 
   <ul class="nav-links">
-    <li><button class="filter-btn active" data-category="all">New</button></li>
-    <li><button class="filter-btn" data-category="cards">Cards</button></li>
-    <li><button class="filter-btn" data-category="journals">Journals</button></li>
-    <li><button class="filter-btn" data-category="gifts">Gifts</button></li>
-    <li><button class="filter-btn" data-category="sale">Sale</button></li>
+    <li><button class="nav-filter-btn active" data-nav-filter="all">New</button></li>
+    <li><button class="nav-filter-btn" data-nav-filter="cards">Cards</button></li>
+    <li><button class="nav-filter-btn" data-nav-filter="journals">Journals</button></li>
+    <li><button class="nav-filter-btn" data-nav-filter="stickers">Gifts</button></li>
+    <li><button class="nav-filter-btn" data-nav-filter="sale">Sale</button></li>
   </ul>
 
   <div class="nav-actions">
@@ -1302,6 +1302,29 @@ document.querySelectorAll('.filter-btn').forEach(btn => {
 
 // Initial load build
 renderProducts();
+ // Connect the top main menu buttons directly to your store catalog
+document.querySelectorAll('.nav-filter-btn').forEach(navBtn => {
+  navBtn.addEventListener('click', () => {
+    const targetFilter = navBtn.getAttribute('data-nav-filter');
+    
+    // 1. Synchronize the active state tab look in the top navbar
+    document.querySelectorAll('.nav-filter-btn').forEach(b => b.classList.remove('active'));
+    navBtn.classList.add('active');
+    
+    // 2. Find the matching round bubble button in the arrivals section and activate it
+    const secondaryFilterBtn = document.querySelector(`.filters .filter-btn[data-filter="${targetFilter}"]`);
+    if (secondaryFilterBtn) {
+      document.querySelectorAll('.filters .filter-btn').forEach(b => b.classList.remove('active'));
+      secondaryFilterBtn.classList.add('active');
+    }
+    
+    // 3. Render filtered items
+    renderProducts(targetFilter);
+    
+    // 4. Smoothly scroll down directly to the product grid section
+    document.getElementById('productGrid').scrollIntoView({ behavior: 'smooth', block: 'center' });
+  });
+});
 </script>
 </body>
 </html>

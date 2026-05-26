@@ -1369,29 +1369,21 @@ async function subscribeNewsletter() {
     btn.textContent = 'Subscribe';
   }
 }
-
-// Open checkout form overlay modal and bundle order info for PayPal
+// Open checkout form overlay modal and bundle order info for PayPal-------------
 document.getElementById('checkoutBtn').addEventListener('click', () => {
-  // Clear any old error messages
   if (document.getElementById('coError')) {
     document.getElementById('coError').style.display = 'none';
   }
-  
-  // Close the cart slider panel and pop open the checkout credentials sheet
   document.getElementById('cartModal').classList.remove('open');
   document.getElementById('checkoutFormModal').style.display = 'flex';
 });
 
 // Intercept the checkout form submit event and pass pricing values into the PayPal parameters
 document.getElementById('paypalDirectForm').addEventListener('submit', function(e) {
-  // 1. Extract clean price data from your cart totals element
   const totalDisplay = document.getElementById('totalPrice').textContent;
   const numericTotal = totalDisplay.replace('$', '').trim();
-  
-  // 2. Map item objects from your existing cart array into a clean, readable text string
   const calculatedItemsSummary = cart.map(item => `${item.name} (Qty: ${item.quantity})`).join(', ');
 
-  // 3. Inject parameters into the hidden tracking nodes for PayPal to read
   document.getElementById('paypalAmountField').value = numericTotal;
   document.getElementById('paypalCartItemsField').value = calculatedItemsSummary;
 });
@@ -1405,7 +1397,7 @@ document.getElementById('cartToggle').addEventListener('click', () => {
   document.getElementById('cartModal').classList.add('open');
 });
 document.getElementById('closeCart').addEventListener('click', () => {
-  document.getElementById('cartModal').classList.remove('remove'); // fixed layout
+  document.getElementById('cartModal').classList.remove('remove');
   document.getElementById('cartModal').classList.remove('open');
 });
 document.getElementById('modalOverlay').addEventListener('click', () => {
@@ -1427,19 +1419,16 @@ renderProducts();
 function filterAndScroll(filter) {
   renderProducts(filter);
 
-  // Sync the secondary filter pills
   document.querySelectorAll('.filters .filter-btn').forEach(b => {
-    b.classList.toggle('active', b.dataset.filter === filter || (filter === 'sale' && b.dataset.filter === 'all' && false));
     if (b.dataset.filter === filter) b.classList.add('active');
     else b.classList.remove('active');
   });
-  // If sale or no matching pill, fall back to "All" pill
+  
   const hasPill = document.querySelector(`.filters .filter-btn[data-filter="${filter}"]`);
   if (!hasPill) {
     document.querySelector('.filters .filter-btn[data-filter="all"]').classList.add('active');
   }
 
-  // Sync nav buttons
   document.querySelectorAll('.nav-filter-btn').forEach(b => {
     b.classList.toggle('active', b.getAttribute('data-nav-filter') === filter);
   });

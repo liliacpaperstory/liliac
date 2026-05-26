@@ -918,9 +918,7 @@
       <form id="paypalDirectForm" action="https://www.paypal.com/cgi-bin/webscr" method="POST">
         
         <input type="hidden" name="cmd" value="_xclick">
-        
         <input type="hidden" name="business" value="your-paypal-email@domain.com"> 
-        
         <input type="hidden" name="item_name" value="Liliac Paper & Goods Order">
         <input type="hidden" name="currency_code" value="CAD">
         
@@ -1374,7 +1372,11 @@ async function subscribeNewsletter() {
     btn.textContent = 'Subscribe';
   }
 }
-// Open checkout form overlay modal and bundle order info for PayPal-------------
+// ==========================================
+// START OF SHOPPING CART INTERACTION CONTROLLERS
+// ==========================================
+
+// Open checkout form overlay modal and bundle order info for PayPal
 document.getElementById('checkoutBtn').addEventListener('click', () => {
   if (document.getElementById('coError')) {
     document.getElementById('coError').style.display = 'none';
@@ -1385,12 +1387,22 @@ document.getElementById('checkoutBtn').addEventListener('click', () => {
 
 // Intercept the checkout form submit event and pass pricing values into the PayPal parameters
 document.getElementById('paypalDirectForm').addEventListener('submit', function(e) {
+  // 1. STOP the form from doing an unconfigured page refresh instantly
+  e.preventDefault();
+
+  // 2. Extract clean price data from your cart totals element
   const totalDisplay = document.getElementById('totalPrice').textContent;
   const numericTotal = totalDisplay.replace('$', '').trim();
+  
+  // 3. Map item objects from your existing cart array into a clean text string
   const calculatedItemsSummary = cart.map(item => `${item.name} (Qty: ${item.quantity})`).join(', ');
 
+  // 4. Inject parameters into the hidden HTML form tracking nodes
   document.getElementById('paypalAmountField').value = numericTotal;
   document.getElementById('paypalCartItemsField').value = calculatedItemsSummary;
+
+  // 5. NOW that values are packaged safely, submit to PayPal's secure gateway link
+  this.submit();
 });
 
 // Simple helper function to close the checkout modal window cleanly
@@ -1398,6 +1410,7 @@ function closeCheckoutModal() {
   document.getElementById('checkoutFormModal').style.display = 'none';
 }
 
+// Slide-Out Shopping Cart Slider Listeners
 document.getElementById('cartToggle').addEventListener('click', () => {
   document.getElementById('cartModal').classList.add('open');
 });
@@ -1409,6 +1422,16 @@ document.getElementById('modalOverlay').addEventListener('click', () => {
   document.getElementById('cartModal').classList.remove('open');
 });
 
+// ==========================================
+// END OF SHOPPING CART INTERACTION CONTROLLERS
+// ==========================================
+
+
+// ==========================================
+// START OF PRODUCT FILTER & NAVIGATION CONTROLLERS
+// ==========================================
+
+// Main secondary category filter pills engine
 document.querySelectorAll('.filter-btn').forEach(btn => {
   btn.addEventListener('click', () => {
     document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
@@ -1417,23 +1440,26 @@ document.querySelectorAll('.filter-btn').forEach(btn => {
   });
 });
 
-// Initial load build
+// Initial store items build load
 renderProducts();
 
-// Shared helper: filter products + scroll to grid
+// Shared helper: filter products + scroll to grid smoothly
 function filterAndScroll(filter) {
   renderProducts(filter);
 
+  // Sync secondary filter pills highlights
   document.querySelectorAll('.filters .filter-btn').forEach(b => {
     if (b.dataset.filter === filter) b.classList.add('active');
     else b.classList.remove('active');
   });
   
+  // Fall back to "All" pill if category doesn't match a secondary pill perfectly
   const hasPill = document.querySelector(`.filters .filter-btn[data-filter="${filter}"]`);
   if (!hasPill) {
     document.querySelector('.filters .filter-btn[data-filter="all"]').classList.add('active');
   }
 
+  // Sync top navbar text navigation menu buttons
   document.querySelectorAll('.nav-filter-btn').forEach(b => {
     b.classList.toggle('active', b.getAttribute('data-nav-filter') === filter);
   });
@@ -1441,13 +1467,17 @@ function filterAndScroll(filter) {
   document.getElementById('new-arrivals').scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
-// Connect the top main menu buttons directly to your store catalog
+// Connect the top main menu navbar buttons directly to your store catalog engine
 document.querySelectorAll('.nav-filter-btn').forEach(navBtn => {
   navBtn.addEventListener('click', () => {
     const targetFilter = navBtn.getAttribute('data-nav-filter');
     filterAndScroll(targetFilter);
   });
 });
+
+// ==========================================
+// END OF PRODUCT FILTER & NAVIGATION CONTROLLERS
+// ==========================================
 </script>
 </body>
 </html>

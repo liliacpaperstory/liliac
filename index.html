@@ -904,45 +904,48 @@
     <button class="checkout-btn" id="checkoutBtn" style="display:none">Proceed to Checkout →</button>
   </div>
 </div>
-
+ <!-- check out Form Modal -->
 <div id="checkoutFormModal" style="display:none; position:fixed; inset:0; background:rgba(44,32,64,0.5); z-index:2000; align-items:center; justify-content:center;">
   <div style="background:#FAF7F2; padding:2.5rem; border-radius:6px; max-width:450px; width:90%; position:relative; max-height:90vh; overflow-y:auto; border:1px solid var(--lilac-mid);">
+    
     <button onclick="closeCheckoutModal()" style="position:absolute; top:1rem; right:1rem; background:none; border:none; font-size:22px; cursor:pointer; color:var(--text-muted);">✕</button>
 
-    <!-- ORDER FORM (shown first) -->
     <div id="checkoutFormInner">
-  <h2 style="font-family:'Playfair Display',serif; font-size:1.6rem; color:var(--lilac-dark); margin-bottom:0.4rem;">Complete Your Order</h2>
-  <p style="font-size:12.5px; color:var(--text-muted); margin-bottom:1.5rem;">You will be securely redirected to PayPal to complete your purchase using a Credit Card or PayPal account.</p>
+      
+      <h2 style="font-family:'Playfair Display',serif; font-size:1.6rem; color:var(--lilac-dark); margin-bottom:0.4rem;">Complete Your Order</h2>
+      <p style="font-size:12.5px; color:var(--text-muted); margin-bottom:1.5rem;">You will be securely redirected to PayPal to complete your purchase using a Credit Card or PayPal account.</p>
 
-  <div id="checkoutOrderSummary" style="background:#fff; border:1px solid #E8DFF0; border-radius:4px; padding:1rem; margin-bottom:1.5rem; font-size:13px; color:var(--text-muted);"></div>
+      <form id="paypalDirectForm" action="https://www.paypal.com/cgi-bin/webscr" method="POST">
+        
+        <input type="hidden" name="cmd" value="_xclick">
+        <input type="hidden" name="business" value="your-paypal-email@domain.com"> 
+        <input type="hidden" name="item_name" value="Liliac Paper & Goods Order">
+        <input type="hidden" name="currency_code" value="CAD">
+        
+        <input type="hidden" name="amount" id="paypalAmountField">
+        <input type="hidden" name="custom" id="paypalCartItemsField">
 
-  <form id="paypalDirectForm" action="https://www.paypal.com/cgi-bin/webscr" method="POST">
-    
-    <input type="hidden" name="cmd" value="_xclick">
-    <input type="hidden" name="business" value="your-paypal-email@domain.com"> 
-    <input type="hidden" name="item_name" value="Liliac Paper & Goods Order">
-    <input type="hidden" name="currency_code" value="CAD">
-    
-    <input type="hidden" name="amount" id="paypalAmountField">
-    <input type="hidden" name="custom" id="paypalCartItemsField">
+        <div style="margin-bottom:1.2rem;">
+          <label style="display:block; font-size:12px; letter-spacing:0.05em; text-transform:uppercase; margin-bottom:4px; color:var(--text-muted);">Full Name</label>
+          <input type="text" id="coName" name="first_name" required style="width:100%; padding:10px; border:1px solid var(--lilac-mid); border-radius:4px; background:#fff; font-family:inherit; font-size:14px;">
+        </div>
+        
+        <div style="margin-bottom:1.2rem;">
+          <label style="display:block; font-size:12px; letter-spacing:0.05em; text-transform:uppercase; margin-bottom:4px; color:var(--text-muted);">Email Address</label>
+          <input type="email" id="coEmail" name="email" required style="width:100%; padding:10px; border:1px solid var(--lilac-mid); border-radius:4px; background:#fff; font-family:inherit; font-size:14px;">
+        </div>
 
-    <div style="margin-bottom:1.2rem;">
-      <label style="display:block; font-size:12px; letter-spacing:0.05em; text-transform:uppercase; margin-bottom:4px; color:var(--text-muted);">Full Name</label>
-      <input type="text" id="coName" required style="width:100%; padding:10px; border:1px solid var(--lilac-mid); border-radius:4px; background:#fff; font-family:inherit; font-size:14px;">
+        <p id="coError" style="display:none; color:#c0392b; font-size:13px; margin-bottom:1rem;"></p>
+
+        <button type="submit" id="coSubmitBtn" class="checkout-btn" style="width:100%;">Proceed to Secure Payment →</button>
+        
+      </form>
+      <p style="font-size:11.5px; color:var(--text-muted); text-align:center; margin-top:1rem; line-height:1.7;">
+        Your payment is processed securely via standard SSL encryption.<br>Your order package ships immediately upon completed transaction. 🔍🛍
+      </p>
+      
     </div>
-    <div style="margin-bottom:1.2rem;">
-      <label style="display:block; font-size:12px; letter-spacing:0.05em; text-transform:uppercase; margin-bottom:4px; color:var(--text-muted);">Email Address</label>
-      <input type="email" id="coEmail" required style="width:100%; padding:10px; border:1px solid var(--lilac-mid); border-radius:4px; background:#fff; font-family:inherit; font-size:14px;">
     </div>
-
-    <p id="coError" style="display:none; color:#c0392b; font-size:13px; margin-bottom:1rem;"></p>
-
-    <button type="submit" id="coSubmitBtn" class="checkout-btn" style="width:100%;">Proceed to Secure Payment →</button>
-  </form>
-  
-  <p style="font-size:11.5px; color:var(--text-muted); text-align:center; margin-top:1rem; line-height:1.7;">
-    Your payment is processed securely via standard SSL encryption.<br>Your order package ships immediately upon completed transaction. 🔍🛍
-  </p>
 </div>
     <!-- CONFIRMATION (shown after success) -->
     <div id="checkoutConfirmation" style="display:none; text-align:center; padding:1rem 0;">
